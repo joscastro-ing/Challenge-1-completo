@@ -1,175 +1,47 @@
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="style.css">
-<title>Encriptador de Texto</title>
-<body style="background: #E5E5E5;">
-	<img src="logo.png" class="logo">
-	<img src="advertencia.png" class="advert">
-	<textarea class="ptext" disabled>Solo letras minusculas y sin acentos</textarea>
-	<div>
-		<input class = "ingreso" placeholder="Ingrese el texto aquí" name="input1"/>
-	</div>
-	<div>
-		<button name="encriptar" type="button" class="encriptar">Encriptar</button>
-		<button name="desencriptar" type="button" class="desencriptar">Desencriptar</button>
-	</div> 
-	<div class="rectangulo">
-		<div>
-			<img src="figura.png" class="figura">
-			<textarea class="nmfe" disabled id="tarea1">Ningún mensaje fue 
-encontrado
-			</textarea>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de Texto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="contenedor1">
+            <div class="logo">
+                <img src="img/logo.png" alt="logo" class="logo__img">
+            </div>
+            <div class="content1">
+                <section class="ingresartext">
+                    <textarea placeholder="Ingrese el texto Aquí" name="" id="" cols="30" rows="10" class="textin" wrap="soft"></textarea>
+                </section>
+                <div class="advertencia">
+                    <img src="img/advertencia.png" alt="warning!!" class="advertencia__imagen">
+                    <p>solo letras minúsculas y sin acentos</p>
+                </div>
+                <div class="botones">
+                    <button class="boton1" type= "button">Encriptar</button>
+                    <button class="boton2" type= "button">Desencriptar</button>
+                </div>                
+            </div> 
+        </div>
+        <div class="contenedor2">
+            <section class="rectangulo">
+                <img src="img/figura.png" alt="figura" class="figura">
+                <textarea class="texto1" cols="30" rows="10" disabled>Ningún mensaje fue encontrado</textarea>
+                <textarea class="texto2"  cols="30" rows="10" disabled>Ingresa el texto que deseas encriptar o desencriptar</textarea>
+            </section>
+            <textarea name="" id="texto" cols="30" rows="10" class="muestra-texto" style="display: none;"></textarea>
+            <button id="copy" class="copiar" type= "button" style="display: none;">Copiar</button>
+        </div> 
 
-			<textarea class="text2" disabled id="tarea2">Ingresa el texto que deseas encriptar o desencriptar</textarea>
-			<textarea id= "texto" name="input2" class="noMensaje" style="display: none;"></textarea>
-			<button id="copy" name="copiar" type= "button" class="copi" style="display: none;">Copiar</button>
-		</div>
-	</div>
+    </main>
+    <script src="script.js"></script>
+    
 </body>
 
-<script>
-	var input = document.querySelector("input[name='input1']");
-	var input2 = document.querySelector("textarea[name='input2']");
-	var encriptar = document.querySelector("button[name='encriptar']");
-	var desencriptar = document.querySelector("button[name= 'desencriptar']");
-	var copiar = document.querySelector("button[name='copiar']");
-	var entrada;
-	var Mayus = true;
-
-	//Función para Habilitar el Texttarea que se mostrara y ocultará la imagen
-	function Habilitar(){
-		document.getElementById("texto").style.display = "";
-		document.getElementById("copy").style.display="";
-	}
-
-	function Mayuscula(){
-		var cadena =/^[a-z\s ñ -.@*''"" ¿?]+\s?$/;
-		if(input.value==""){
-			alert("Ingrese un texto primero")
-		}
-		else if (input.value.match(cadena)){
-			Mayus = true
-		}
-		else{
-			Mayus = false
-		}
-		
-		return Mayus;
-
-	}
-
-	//Función para Encriptar
-	function Encriptar(){
-		
-		entrada= (input.value).split('');//Convierte la cadena en un Array
-		if(Mayuscula() == true){
-
-			for(var i=0; i<entrada.length;i++){
-
-				if (entrada[i]=="e"){
-					entrada[i] = "enter";
-				}
-
-				else if(entrada[i]=="i"){
-					entrada[i] = "imes";
-				}
-				else if(entrada[i]=="a"){
-					entrada[i]="ai";
-				}
-				else if(entrada[i]=="o"){
-					entrada[i] = "ober";
-				}
-				else if(entrada[i]=="u"){
-					entrada[i] = "ufat"
-				}
-			}
-			var convertido = (entrada.toString()).replace(/,/g,"");
-			console.log(convertido);
-			Habilitar();
-			input2.value = convertido;
-			input.value="";
-
-		}
-
-		else{
-			alert("No se pueden ingresar Mayusculas ni tildes");
-			input.value="";
-		}		
-
-	}
-	function Desencriptar(){
-		entrada= (input.value).split('')
-		for(var i=0; i<entrada.length;i++){
-			if (entrada[i] =="e"
-				&& entrada[i+1] == "n"
-				&& entrada [i+2] == "t"
-				&& entrada [i+3] == "e"
-				&& entrada [i+4] == "r"
-				){
-					entrada[i] = "e";
-					entrada[i+1] = "";
-					entrada [i+2] = "";
-					entrada [i+3] = "";
-					entrada [i+4] = "";
-			}
-			else if (entrada[i] == "i"
-				&& entrada [i+1] == "m"
-				&& entrada [i+2] == "e"
-				&& entrada [i+3] == "s"
-				){
-					entrada[i] = "i";
-					entrada [i+1] ="";
-					entrada [i+2] ="";
-					entrada [i+3] ="";
-			}
-			else if (entrada[i] == "a"
-				&& entrada [i+1] == "i"
-				){
-					entrada[i] = "a";
-					entrada [i+1] ="";
-			}
-			else if(entrada[i] == "o"
-				&& entrada [i+1] == "b"
-				&& entrada [i+2] == "e"
-				&& entrada [i+3] == "r"
-				){
-					entrada[i] = "o";
-					entrada [i+1] = "";
-					entrada [i+2] = "";
-					entrada [i+3] = "";
-
-			}
-			else if(entrada[i] == "u"
-				&& entrada [i+1] == "f"
-				&& entrada [i+2] == "a"
-				&& entrada [i+3] == "t"
-				){
-				entrada[i] = "u";
-				entrada [i+1] = "";
-				entrada [i+2] = "";
-				entrada [i+3] = "";
-			}
-		}
-		var convertido = (entrada.toString()).replace(/,/g,"");
-		console.log(convertido);
-		Habilitar();
-		input2.value = convertido;
-		input.value="";
-	}
-
-	function Copiar(){
-
-		var texto = document.getElementById("texto");
-		texto.select();
-		texto.setSelectionRange(0, 99999);
-		document.execCommand("copy")
-		alert("Copiado al portapapeles");
-		console.log()
-	}
-
-	encriptar.onclick=Encriptar;
-	desencriptar.onclick= Desencriptar;
-	copiar.onclick=Copiar;
-
-
-
-</script>
+</html>
